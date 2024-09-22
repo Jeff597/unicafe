@@ -3,9 +3,9 @@ import './main.scss'
 
 const All = (props) => {
   const {setTotal} = props
-  const total = Object.values(props).reduce((acc, val) => acc + (typeof val === 'number' ? val : 0), 0);
-  setTotal(total)
-  return <p>All {total}</p>
+  const value = Object.values(props).reduce((acc, val) => acc + (typeof val === 'number' ? val : 0), 0);
+  setTotal(value)
+  return <p>All {value}</p>
 }
 
 const Average = (props) => {
@@ -20,6 +20,15 @@ const Positive = (props) => {
 
 const Button = ({handleClick, text}) => {
   return <button onClick={handleClick}>{text}</button>
+}
+
+const Statistics = (props) => {
+  const {good, bad, total} = props
+  return <div className="statistics">
+  <p>Average {total > 0 ? (good - bad) / total : 0}</p>
+  <p>Positive {total > 0 ? (good / total) * 100 : 0}</p>
+  </div>
+
 }
 
 
@@ -48,9 +57,11 @@ const App = () => {
       <p>good {good}</p>
       <p>neutral {neutral}</p>
       <p>bad {bad}</p>
-      <All good={good} bad={bad} neutral={neutral} setTotal={setTotal}/> 
-      <Average good={good} bad={bad} total={total}/>
-      <Positive good={good} total={total}/>
+      <All good={good} bad={bad} neutral={neutral}
+      
+      
+      setTotal={setTotal}/> 
+      <Statistics good={good} bad={bad} total={total}/>
     </main>
   )
 }
