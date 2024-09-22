@@ -24,10 +24,12 @@ const Button = ({handleClick, text}) => {
 
 const Statistics = (props) => {
   const {good, bad, total} = props
-  return <div className="statistics">
+   if(good || bad > 0) {return <div className="statistics">
   <p>Average {total > 0 ? (good - bad) / total : 0}</p>
   <p>Positive {total > 0 ? (good / total) * 100 : 0}</p>
-  </div>
+  </div>} else {
+    return "No feedback given"
+  }
 
 }
 
